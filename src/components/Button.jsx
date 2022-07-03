@@ -1,7 +1,12 @@
 import React from 'react'
 
-export const Button = () => {
+export const Button = ({color, title, onClick}) => {
   return (
-    <button className='btn'> Add</button>
+    <button className='btn' 
+      style={{backgroundColor: color}} 
+      onClick= {onClick}
+      > 
+      {title}
+    </button>
   )
 }
