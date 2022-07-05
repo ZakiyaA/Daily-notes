@@ -85,6 +85,13 @@ flex: 1;
   margin: 20px;
 }
 
+.add-task {
+  background-color: rgb(241, 247, 248);
+  margin: 10px;
+}
+
+
+
 footer {
   margin: 30px;
   padding: 10px;

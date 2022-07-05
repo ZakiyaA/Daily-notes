@@ -1,27 +1,13 @@
-const tasks = [
-    {
-        id: 1,
-        title: 'Doctor Appoinment',
-        day: 'August 12 @ 2:30pm',
-        remider: true,
-    },
-    {
-        id: 2,
-        title: '30days coding ',
-        day: 'July 12 @ 9:30pm',
-        remider: true,
-    }
-];
+import { TasksLists } from "./TasksLists";
 
 
 
-const Task = () => {
+const Task = ({tasks, onDelete}) => {
   return (
       <>
     {tasks.map((task) => (
-        <h3>{task.day} </h3>
+        <TasksLists key={task.id} task={task} onDelete={onDelete}/>
         ))}
-  
       </>
   );
     }
