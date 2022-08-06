@@ -88,8 +88,12 @@ flex: 1;
 .add-task {
   background-color: rgb(241, 247, 248);
   margin: 10px;
+  padding: 10px;
 }
-
+ 
+.reminder {
+  border-left: solid 5px #22a311;
+}
 
 
 footer {

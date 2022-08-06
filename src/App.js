@@ -15,21 +15,37 @@ function App() {
         id: 1,
         title: 'Doctor Appoinment',
         day: 'August 12 @ 2:30pm',
-        remider: true,
+        reminder: true,
     },
     {
         id: 2,
         title: '30days coding ',
         day: 'July 12 @ 9:30pm',
-        remider: true,
+        reminder: true,
+    },
+    {
+        id: 3,
+        title: 'Laundary ',
+        day: 'Sundays  @ 10:30pm',
+        reminder: false,
     }
   ]); 
 
   const Delete = (id) => {
-    
-    setTasks(tasks.filter((task) =>  task.id !== id));
+    setTasks(
+      tasks.filter((task) =>  
+      task.id !== id));
     
 }
+
+  const Reminder = (id) => {
+    setTasks(
+      tasks.map((task) => 
+      task.id === id ? { ...task, reminder: 
+        !task.reminder } : task
+      )
+    )
+  }
 
   return (
     <div className="App">
@@ -37,7 +53,12 @@ function App() {
      <Header />
      <Input />
      <Footer />
-     <Task tasks={tasks} onDelete = {Delete}/>
+     {tasks.length > 0 ? (
+     <Task tasks={tasks} onDelete = {Delete} onToggle = {Reminder}/>
+     ) : (
+       'No tasks to show'
+       )}
+     
     </div>
     </div>
   );

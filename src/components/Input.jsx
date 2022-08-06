@@ -14,7 +14,7 @@ export const Input = () => {
             
         </div>
         <div className="form-check">
-            <label for="vehicle1"> Set Reminder</label>
+            <label > Set Reminder</label>
             <input type="checkbox"  name="" value=""/>
         </div>
         <input className="btn submit-btn" type="submit" value="Save Task" />
