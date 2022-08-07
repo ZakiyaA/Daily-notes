@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <header className="header">
         <h1 className="title">Task Manager</h1>
-        <Button color='red' title='Add' onClick={onClick}/>
+        <Button color='green' title='Add' onClick={onClick}/>
     </header>
   )
 }

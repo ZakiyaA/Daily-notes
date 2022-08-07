@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Footer } from "./components/Footer.jsx";
 import { Header } from "./components/Header.jsx";
-import { Input } from "./components/Input.jsx";
+import { AddTask } from "./components/AddTask.jsx";
 import Task from "./components/Task.jsx";
 
 
@@ -31,6 +31,14 @@ function App() {
     }
   ]); 
 
+  const addTAsk = (task) => {
+    
+    const id = Math.floor(Math.random() * 100) + 1;
+    const newTask = { id, ...task}
+    setTasks([...tasks, newTask]);
+    console.log(task);
+  }
+
   const Delete = (id) => {
     setTasks(
       tasks.filter((task) =>  
@@ -51,14 +59,13 @@ function App() {
     <div className="App">
        <div className="container">
      <Header />
-     <Input />
-     <Footer />
+     <AddTask  onAdd= {addTAsk}/>
      {tasks.length > 0 ? (
-     <Task tasks={tasks} onDelete = {Delete} onToggle = {Reminder}/>
+     <Task tasks={tasks} onDelete = {Delete} onToggle = {Reminder} onAdd= {addTAsk}/>
      ) : (
        'No tasks to show'
        )}
-     
+     <Footer />
     </div>
     </div>
   );
