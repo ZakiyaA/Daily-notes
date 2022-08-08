@@ -3,14 +3,12 @@ import { Button } from './Button';
 
 
 
-export const Header = () => {
-  const onClick = () => {
-    console.log("Clicked");
-  }
+export const Header = ({onAdd, showTask}) => {
+ 
   return (
     <header className="header">
-        <h1 className="title">Task Manager</h1>
-        <Button color='green' title='Add' onClick={onClick}/>
+        <h1 className="title">Daily Notes</h1>
+        <Button color={!showTask ? "green" : "red"} title={!showTask ? "Add" : "Close"} onClick={onAdd} />
     </header>
   )
 }

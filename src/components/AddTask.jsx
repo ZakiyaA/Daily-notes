@@ -1,53 +1,68 @@
 import {React, useState} from 'react';
-import $ from 'jquery'
+import Alert from 'react-bootstrap/Alert';
+
 
 export const AddTask = ({onAdd}) => {
 
-  const [title, setTitle] = useState("")
-  const [day, setDay] = useState("")
-  const [reminder, setReminder] = useState(false)  
-   
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [reminder, setReminder] = useState(false);  
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(!title || !day) {
-      $(".task").after("<span>You Should Type Your Task</span>");
-    }
-    // else {
-    onAdd({title, day, reminder});
+    if(!title ) {
+      alert("please Enter")
+    } 
+    else {
+    onAdd({title, content, reminder});
     setTitle("");
-    setDay("");
+    setContent("");
     setReminder(false);
-    // }
-
+    
+    }
   }
+
+
+
+
   return (
+    
     <form className='task' onSubmit = {handleSubmit}>
+        
         <div className="form-control">
-            <label >Task </label>
+            <label >Title </label>
             <input 
             className='title'
             type="text" 
             value={title}
             onChange={(event)=> setTitle(event.target.value)}
-            placeholder='Add Task'/>
+            // // onFocus={() => document.getElementsByClassName('error')[0].style.visibility = 'hidden'}
+            placeholder='Title'/>
         </div>
         <div className="form-control">
-            <label >Day & Time</label>
-            <input type="text" 
-            value={day}
-            onChange={(event)=> setDay(event.target.value)}
-            placeholder='Add Day & Time'/>
+            <label >Content</label>
+            <textarea type="textare" 
+            rows={8} 
+            style={{ width: "100%" }}
+            value={content}
+            onChange={(event)=> setContent(event.target.value)}
+            placeholder='Note Content'/>
             
         </div>
         <div className="form-control form-check">
             <label > Set Reminder</label>
             <input type="checkbox" 
+             
             value={reminder}
             onChange={(event)=> setReminder(event.currentTarget.checked)} 
             />
+           
         </div>
-        <input className="btn submit-btn" type="submit"  value="Save Task" />
+ 
+        <input className="btn submit-btn" type="submit"  value="Save Note" />
+        
     </form>
+    
   )
 }

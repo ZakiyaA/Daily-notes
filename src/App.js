@@ -1,49 +1,30 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Footer } from "./components/Footer.jsx";
 import { Header } from "./components/Header.jsx";
 import { AddTask } from "./components/AddTask.jsx";
 import Task from "./components/Task.jsx";
-
-
-
+import axios from 'axios';
 
 function App() {
-
-  const [tasks, setTasks] = useState([
-    {
-        id: 1,
-        title: 'Doctor Appoinment',
-        day: 'August 12 @ 2:30pm',
-        reminder: true,
-    },
-    {
-        id: 2,
-        title: '30days coding ',
-        day: 'July 12 @ 9:30pm',
-        reminder: true,
-    },
-    {
-        id: 3,
-        title: 'Laundary ',
-        day: 'Sundays  @ 10:30pm',
-        reminder: false,
-    }
-  ]); 
-
+  const [tasks, setTasks] = useState([]); 
+  const [showTask, setShowTask] = useState(false);
+  
+  
   const addTAsk = (task) => {
-    
-    const id = Math.floor(Math.random() * 100) + 1;
-    const newTask = { id, ...task}
-    setTasks([...tasks, newTask]);
-    console.log(task);
+    axios.post('http://localhost:3000/tasks', task )
+    .then((response) => {setTasks([response.data, ...tasks]);})
+    .catch((error) => {console.log(error);
+  })
   }
 
   const Delete = (id) => {
+    axios.delete(`http://localhost:3000/tasks/${id}/`)
+    .then(resp => {console.log(resp.data)})
+    .catch(error => {console.log(error);});
     setTasks(
       tasks.filter((task) =>  
       task.id !== id));
-    
 }
 
   const Reminder = (id) => {
@@ -55,11 +36,22 @@ function App() {
     )
   }
 
+// use axios for data feaching...
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/tasks')
+      .then(response => {
+        console.log(response.data)
+        setTasks(response.data)
+      })
+  }, [])
+
   return (
     <div className="App">
        <div className="container">
-     <Header />
-     <AddTask  onAdd= {addTAsk}/>
+     <Header onAdd={() => setShowTask(!showTask)}
+     showTask={showTask}/>
+     {showTask && <AddTask  onAdd= {addTAsk}/>}
      {tasks.length > 0 ? (
      <Task tasks={tasks} onDelete = {Delete} onToggle = {Reminder} onAdd= {addTAsk}/>
      ) : (
