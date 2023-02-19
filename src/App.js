@@ -12,14 +12,14 @@ function App() {
   
   
   const addTAsk = (task) => {
-    axios.post('http://localhost:3000/tasks', task )
+    axios.post('api/tasks', task )
     .then((response) => {setTasks([response.data, ...tasks]);})
     .catch((error) => {console.log(error);
   })
   }
 
   const Delete = (id) => {
-    axios.delete(`http://localhost:3000/tasks/${id}/`)
+    axios.delete(`api/tasks/${id}/`)
     .then(resp => {console.log(resp.data)})
     .catch(error => {console.log(error);});
     setTasks(
@@ -39,7 +39,7 @@ function App() {
 // use axios for data feaching...
   useEffect(() => {
     axios
-      .get('http://localhost:3000/tasks')
+      .get('api/tasks')
       .then(response => {
         console.log(response.data)
         setTasks(response.data)
@@ -55,7 +55,7 @@ function App() {
      {tasks.length > 0 ? (
      <Task tasks={tasks} onDelete = {Delete} onToggle = {Reminder} onAdd= {addTAsk}/>
      ) : (
-       'No tasks to show'
+       'No Notes to Show'
        )}
      <Footer />
     </div>
